@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Loxo Job Analytics API
+  description: Retrieve and manage job pipeline statistics and candidate data, including filtering, tagging, and notes.
+  version: 1.2.0
+servers:
+  - url: https://loxo.co/api/v1
+    description: Loxo production API
+paths:
+  /jobs/{jobId}/pipeline:
+    get:
+      operationId: getJobPipelineStats
+      summary: Get pipeline statistics for a specific job
+      description: Returns a breakdown of the number of candidates in each stage of a job's pipeline.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Candidate counts by stage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: integer
+                  stages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        stage:
+                          type: string
+                        count:
+                          type: integer
+
+  /jobs/{jobId}/candidates:
+    get:
+      operationId: listJobCandidates
+      summary: List candidates in a job's pipeline
+      description: Returns candidates for a job, with filtering and pagination.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: stage
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: location
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: createdAfter
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of candidates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                  perPage:
+                    type: integer
+                  total:
+                    type: integer
+                  candidates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        title:
+                          type: string
+                        location:
+                          type: string
+                        email:
+                          type: string
+                        phone:
+                          type: string
+                        source:
+                          type: string
+                        stage:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        notes:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              noteId:
+                                type: integer
+                              content:
+                                type: string
+                              createdAt:
+                                type: string
+                                format: date-time
+                              author:
+                                type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+
+  /candidates/{candidateId}/notes:
+    post:
+      operationId: addCandidateNote
+      summary: Add a note to a candidate
+      parameters:
+        - name: candidateId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                author:
+                  type: string
+      responses:
+        '201':
+          description: Note created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  noteId:
+                    type: integer
+                  content:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  author:
+                    type: string
