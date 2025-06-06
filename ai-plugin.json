@@ -1,0 +1,20 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Loxo Job Insights",
+  "name_for_model": "loxoJobInsights",
+  "description_for_human": "Get stats, candidates, filters, and notes from Loxo job pipelines.",
+  "description_for_model": "Fetch job stats and candidates with filters, notes, and tags from Loxo.",
+  "auth": {
+    "type": "api_key",
+    "authorization_type": "header",
+    "verification_tokens": {}
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://buckspider.github.io/loxo-gpt-plugin/openapi.yaml",
+    "has_user_authentication": false
+  },
+  "logo_url": "https://buckspider.github.io/loxo-gpt-plugin/logo.png",
+  "contact_email": "you@example.com",
+  "legal_info_url": "https://buckspider.github.io/loxo-gpt-plugin/legal.html"
+}
