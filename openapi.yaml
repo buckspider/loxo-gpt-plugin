@@ -4,15 +4,13 @@ info:
   description: Retrieve and manage job pipeline statistics and candidate data, including filtering, tagging, and notes.
   version: 1.2.0
 servers:
-  - url: https://api.example.com
-    description: Placeholder URL for GPT validation
-
+  - url: https://mock.loxo-gpt.com
+    description: Mock server for OpenAI GPT validation
 paths:
   /jobs/{jobId}/pipeline:
     get:
       operationId: getJobPipelineStats
       summary: Get pipeline statistics for a specific job
-      description: Returns a breakdown of the number of candidates in each stage of a job's pipeline.
       parameters:
         - name: jobId
           in: path
@@ -43,7 +41,6 @@ paths:
     get:
       operationId: listJobCandidates
       summary: List candidates in a job's pipeline
-      description: Returns candidates for a job, with filtering and pagination.
       parameters:
         - name: jobId
           in: path
@@ -52,43 +49,35 @@ paths:
             type: integer
         - name: stage
           in: query
-          required: false
           schema:
             type: string
         - name: title
           in: query
-          required: false
           schema:
             type: string
         - name: location
           in: query
-          required: false
           schema:
             type: string
         - name: source
           in: query
-          required: false
           schema:
             type: string
         - name: tag
           in: query
-          required: false
           schema:
             type: string
         - name: createdAfter
           in: query
-          required: false
           schema:
             type: string
             format: date-time
         - name: page
           in: query
-          required: false
           schema:
             type: integer
         - name: perPage
           in: query
-          required: false
           schema:
             type: integer
       responses:
