@@ -4,8 +4,9 @@ info:
   description: Retrieve and manage job pipeline statistics and candidate data, including filtering, tagging, and notes.
   version: 1.2.0
 servers:
-  - url: https://loxo.co/api/v1
-    description: Loxo production API
+  - url: https://api.example.com
+    description: Placeholder URL for GPT validation
+
 paths:
   /jobs/{jobId}/pipeline:
     get:
