@@ -4,8 +4,9 @@ info:
   description: Retrieve and manage job pipeline statistics and candidate data, including filtering, tagging, and notes.
   version: 1.2.0
 servers:
-  - url: https://mock.loxo-gpt.com
-    description: Mock server for OpenAI GPT validation
+  - url: https://buckspider.github.io/loxo-gpt-plugin
+    description: Static hosting placeholder for GPT validation
+
 paths:
   /jobs/{jobId}/pipeline:
     get:
